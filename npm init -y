@@ -1,0 +1,36 @@
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const port = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// Endpoint submit izin
+app.post('/api/submit-permit', (req, res) => {
+  const { requester, studentName, reason, date, schoolEmail, parentEmail, whatsappNumber } = req.body;
+
+  // Validasi sederhana
+  if (!requester || !studentName || !reason || !date || !schoolEmail || !parentEmail || !whatsappNumber) {
+    return res.status(400).send('Data tidak lengkap');
+  }
+
+  // Validasi format tanggal sederhana: YYYY-MM-DD
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(date)) {
+    return res.status(400).send('Format tanggal salah, gunakan YYYY-MM-DD');
+  }
+
+  // TODO: Ganti bagian ini dengan logic penyimpanan DB, pengiriman email, atau WhatsApp
+  console.log('Permintaan Izin Diterima:', req.body);
+
+  // Simulasi kirim email & WA
+  // Kirim email bisa pakai nodemailer, kirim WA bisa pakai Twilio API (bukan contoh di sini)
+
+  return res.status(200).send('Permintaan izin berhasil diterima');
+});
+
+app.listen(port, () => {
+  console.log(`Server berjalan di http://localhost:${port}`);
+});
