@@ -7,6 +7,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+
 // Endpoint submit izin
 app.post('/api/submit-permit', (req, res) => {
   const { requester, studentName, reason, date, schoolEmail, parentEmail, whatsappNumber } = req.body;
