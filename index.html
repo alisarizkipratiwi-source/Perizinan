@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Perijinan Sekolah</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aplikasi Perijinan Sekolah</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Aplikasi Perijinan Sekolah</h1>
-        <form id="permitForm">
-            <label for="requester">Jenis Izin:</label>
-            <select id="requester" name="requester" required>
-                <option value="">Pilih...</option>
-                <option value="parent">Orangtua ke Sekolah</option>
-                <option value="student">Siswa ke Sekolah</option>
-                <option value="teacher">Guru ke Sekolah</option>
-                <option value="school">Sekolah ke Orangtua</option>
-            </select>
+  <div class="container">
+    <h1>Aplikasi Perijinan Sekolah</h1>
+    <form id="permitForm">
+      <label for="requester">Jenis Izin:</label>
+      <select id="requester" name="requester" required>
+        <option value="">Pilih...</option>
+        <option value="parent">Orangtua ke Sekolah</option>
+        <option value="student">Siswa ke Sekolah</option>
+        <option value="teacher">Guru ke Sekolah</option>
+        <option value="school">Sekolah ke Orangtua</option>
+      </select>
 
-            <label for="studentName">Nama Siswa:</label>
-            <input type="text" id="studentName" name="studentName" required>
+      <label for="studentName">Nama Siswa:</label>
+      <input type="text" id="studentName" name="studentName" required />
 
-            <label for="reason">Alasan:</label>
-            <textarea id="reason" name="reason" required></textarea>
+      <label for="reason">Alasan:</label>
+      <textarea id="reason" name="reason" required></textarea>
 
-            <label for="date">Tanggal:</label>
-            <input type="date" id="date" name="date" required>
+      <label for="date">Tanggal:</label>
+      <input type="date" id="date" name="date" required />
 
-            <label for="schoolEmail">Email Sekolah:</label>
-            <input type="email" id="schoolEmail" name="schoolEmail" required>
+      <label for="schoolEmail">Email Sekolah:</label>
+      <input type="email" id="schoolEmail" name="schoolEmail" required />
 
-            <label for="parentEmail">Email Orangtua:</label>
-            <input type="email" id="parentEmail" name="parentEmail" required>
+      <label for="parentEmail">Email Orangtua:</label>
+      <input type="email" id="parentEmail" name="parentEmail" required />
 
-            <label for="whatsappNumber">Nomor WhatsApp (dengan kode negara, e.g., +62812...):</label>
-            <input type="text" id="whatsappNumber" name="whatsappNumber" required>
+      <label for="whatsappNumber">Nomor WhatsApp (dengan kode negara, misal +628...):</label>
+      <input type="text" id="whatsappNumber" name="whatsappNumber" required />
 
-            <button type="submit">Kirim Permintaan</button>
-        </form>
-        <div id="message"></div>
-    </div>
-    <script src="script.js"></script>
+      <button type="submit">Kirim Permintaan</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
