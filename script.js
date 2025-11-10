@@ -1,37 +1,48 @@
 document.getElementById('permitForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Mencegah reload halaman
+  event.preventDefault();
 
-    // Ambil data dari form
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
+  const form = event.target;
+  const messageEl = document.getElementById('message');
 
-    // Validasi sederhana (opsional, bisa ditambah)
-    if (!data.requester || !data.studentName || !data.reason || !data.date || !data.schoolEmail || !data.parentEmail || !data.whatsappNumber) {
-        document.getElementById('message').innerText = 'Harap isi semua field!';
-        document.getElementById('message').style.color = 'red';
-        return;
+  // Ambil data dari form
+  const data = {
+    requester: form.requester.value.trim(),
+    studentName: form.studentName.value.trim(),
+    reason: form.reason.value.trim(),
+    date: form.date.value, // format YYYY-MM-DD sudah benar dari input[type=date]
+    schoolEmail: form.schoolEmail.value.trim(),
+    parentEmail: form.parentEmail.value.trim(),
+    whatsappNumber: form.whatsappNumber.value.trim()
+  };
+
+  // Validasi sederhana
+  for (const [key, value] of Object.entries(data)) {
+    if (!value) {
+      messageEl.innerText = `Field ${key} wajib diisi.`;
+      messageEl.style.color = 'red';
+      return;
     }
+  }
 
-    try {
-        // Kirim ke backend (ganti URL dengan endpoint Anda, e.g., http://localhost:3000/api/submit-permit)
-        const response = await fetch('http://localhost:3000/api/submit-permit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+  try {
+    const response = await fetch('http://localhost:3000/api/submit-permit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
 
-        if (response.ok) {
-            document.getElementById('message').innerText = 'Permintaan izin berhasil dikirim! Cek email/WA untuk konfirmasi.';
-            document.getElementById('message').style.color = 'green';
-            event.target.reset(); // Reset form
-        } else {
-            throw new Error('Gagal mengirim');
-        }
-    } catch (error) {
-        document.getElementById('message').innerText = 'Terjadi kesalahan. Coba lagi.';
-        document.getElementById('message').style.color = 'red';
-        console.error(error);
+    if (response.ok) {
+      messageEl.innerText = 'Permintaan izin berhasil dikirim! Cek email/WhatsApp untuk konfirmasi.';
+      messageEl.style.color = 'green';
+      form.reset();
+    } else {
+      const text = await response.text();
+      messageEl.innerText = `Gagal mengirim: ${text}`;
+      messageEl.style.color = 'red';
     }
+  } catch (error) {
+    messageEl.innerText = `Terjadi kesalahan: ${error.message}`;
+    messageEl.style.color = 'red';
+    console.error('Error:', error);
+  }
 });
