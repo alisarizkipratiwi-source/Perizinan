@@ -4,6 +4,7 @@ document.getElementById('permitForm').addEventListener('submit', async function(
   const form = event.target;
   const messageEl = document.getElementById('message');
 
+  
   // Ambil data dari form
   const data = {
     requester: form.requester.value.trim(),
